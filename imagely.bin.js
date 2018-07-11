@@ -37,13 +37,13 @@ if (options.log) {
 	};
 }
 else if (options.batch) {
-	callback = function() {
+	callback = async function() {
 		if (this.jsonIndex < this.json.length) {
 			var name = this.destination.split('.').slice(0, -1).pop();
 			var uniqueName = this.destination.replace(name, name + this.jsonIndex);
 			var html = this.setWindowData(this.originalHtmlString, JSON.stringify(this.json[this.jsonIndex]));
 
-			this.page.setContent(html);
+			await this.page.setContent(html);
 			this.renderPage(uniqueName);
 			this.jsonIndex++;
 		}
